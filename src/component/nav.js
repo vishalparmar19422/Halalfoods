@@ -1,26 +1,50 @@
-const Nav = () => (
-  <>
-    <div className="flex justify-between items-center px-10 bg-orange-500 cursor-pointer">
-      <img
-        className="w-20 rounded-full"
-        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdVb-8-He7VPayaMm3wA_j2CMDOZvUxbaYfw&usqp=CAU"></img>
+import { useState } from "react";
+import  Logo  from "./assets/logo copy.png";
 
-      <ul className="text-white flex gap-10  font-bold  ">
-        <li className="p-1 rounded-md h-8 hover:bg-red-600 transition ease-linear duration-200">
-          home
-        </li>
-        <li className="p-1 rounded-md h-8 hover:bg-red-600 transition ease-linear duration-200   ">
-          about
-        </li>
-        <li className="p-1 rounded-md h-8 hover:bg-red-600 transition ease-linear duration-200">
-          contact
-        </li>
-        <li className="p-1 rounded-md h-8 hover:bg-red-600 transition ease-linear duration-200">
-          social
-        </li>
-      </ul>
-    </div>
-  </>
-);
+export  const Nav = () => {
+  const [button, setButton] = useState(false);
+  return (
+    <>
+      <div className="flex justify-between items-center px-10 bg-slate-800 cursor-pointer">
+        <img
+          className="w-[120px] rounded-full"
+          src={Logo}
+        ></img>
 
-export default Nav;
+        <ul className="text-white flex gap-10  font-bold text-[18px]  ">
+          <li className="p-1 rounded-md h-8 hover:bg-red-600 transition ease-linear duration-200">
+            Home
+          </li>
+          <li className="p-1 rounded-md h-8 hover:bg-red-600 transition ease-linear duration-200   ">
+            About
+          </li>
+          <li className="p-1 rounded-md h-8 hover:bg-red-600 transition ease-linear duration-200">
+            Contact
+          </li>
+          <li className="p-1 rounded-md h-8 hover:bg-red-600 transition ease-linear duration-200">
+            Cart
+          </li>
+        </ul>
+        {button ? (
+          <button className="border-2  border-black bg-neutral-300 rounded-lg px-2  "
+            onClick={() => {
+              setButton(false);
+            }}
+          >
+            Log In
+          </button>
+        ) : (
+          <button className="border-2  border-black bg-neutral-300 rounded-lg px-2"
+            onClick={() => { 
+              setButton(true);
+            }}
+          >
+            Log Out
+          </button>
+        )}
+      </div>
+    </>
+  );
+};
+
+

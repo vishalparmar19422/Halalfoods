@@ -2,11 +2,12 @@ import { Card } from "./card";
 import { useEffect, useState } from "react";
 import Loader from "./loader";
 
+const isUserAuth = true;
 const NorestaurantFound = () => {
   return (
     <>
-      <div className="w-full h-[200px] m-0 p-0  rounded-lg flex justify-center items-center">
-        <h1>NO Result Found</h1>
+      <div className="w-full h-[800px] m-0 p-0 text-[80px] rounded-lg flex justify-center items-center animate-bounce">
+        <h1>NO Result Found</h1>d
       </div>
     </>
   );
@@ -26,6 +27,9 @@ const Body = () => {
       "https://www.swiggy.com/dapi/restaurants/list/v5?lat=23.02760&lng=72.58710&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
     );
     const json = await data.json();
+    // console.log(
+    //   json.data.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+    // );
     setAllrestaurants(
       json.data.cards[1]?.card?.card?.gridElements?.infoWithStyle
         ?.restaurants || []
@@ -35,7 +39,6 @@ const Body = () => {
         ?.restaurants || []
     ); // Use optional chaining and provide a default empty array if any property is missing
   }
-
   return (
     <>
       <div className="flex justify-center w-full mt-2 h-8 ">
@@ -44,7 +47,7 @@ const Body = () => {
           placeholder="Search "
           value={searchTxt}
           onChange={(e) => setSearchTxt(e.target.value)}
-          className="rounded-l-md focus:outline-none pl-2 w-[500px] bg-stone-500 placeholder:italic placeholder:text-white   focus:text-white focus:text-lg"
+          className="rounded-l-md focus:outline-none pl-2 w-[500px] bg-stone-500 placeholder:italic  placeholder:text-white text-white focus:text-white focus:text-lg"
         />
         <button
           className="text-white rounded-r-lg bg-stone-500 pr-2 "
@@ -66,7 +69,7 @@ const Body = () => {
           <NorestaurantFound />
         ) : (
           restaurants.map((restaurant, index) => {
-            return <Card {...restaurant.info} />;
+            return <Card {...restaurant.info} key={restaurant.info.id} />;
           })
         )}
       </div>
@@ -77,7 +80,9 @@ export default Body;
 
 function filterData(searchTxt, restaurants) {
   const filterData = restaurants.filter((restaurantlist) => {
-    return restaurantlist.info.name.toLowerCase().includes(searchTxt.toLowerCase());
+    return restaurantlist.info.name
+      .toLowerCase()
+      .includes(searchTxt.toLowerCase());
   });
   return filterData;
 }
