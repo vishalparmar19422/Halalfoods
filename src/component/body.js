@@ -1,13 +1,14 @@
 import { Card } from "./card";
 import { useEffect, useState } from "react";
 import Loader from "./loader";
+import { Link } from "react-router-dom";
 
 const isUserAuth = true;
 const NorestaurantFound = () => {
   return (
     <>
-      <div className="w-full h-[800px] m-0 p-0 text-[80px] rounded-lg flex justify-center items-center animate-bounce">
-        <h1>NO Result Found</h1>d
+      <div className="w-full h-[600px] mt-[600px] p-0 text-[80px] rounded-lg flex justify-center items-start animate-bounce">
+        <h1>NO Result Found</h1>
       </div>
     </>
   );
@@ -27,9 +28,7 @@ const Body = () => {
       "https://www.swiggy.com/dapi/restaurants/list/v5?lat=23.02760&lng=72.58710&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
     );
     const json = await data.json();
-    // console.log(
-    //   json.data.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
-    // );
+    
     setAllrestaurants(
       json.data.cards[1]?.card?.card?.gridElements?.infoWithStyle
         ?.restaurants || []
@@ -69,7 +68,7 @@ const Body = () => {
           <NorestaurantFound />
         ) : (
           restaurants.map((restaurant, index) => {
-            return <Card {...restaurant.info} key={restaurant.info.id} />;
+            return <Link key={restaurant.info.id} to={"/restaurant/"+restaurant.info.id}><Card {...restaurant.info} /></Link>
           })
         )}
       </div>

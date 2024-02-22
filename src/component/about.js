@@ -10,7 +10,7 @@ export default function AboutUs() {
         We are a food delivery company using the Swiggy API to bring delicious
         meals to your doorstep.
       </p>
-      <div className="mt-8 p-4 bg-white rounded-lg shadow-lg">
+      <div className="mt-8 p-4 bg-stone-200 rounded-lg shadow-xl">
         <img
           src={Logo}
           alt="app Logo"
