@@ -5,6 +5,7 @@ import { Nav } from "./component/nav";
 import Body from "./component/body";
 import Footer from "./component/footer";
 import AboutUs from "./component/about";
+import {Profile} from "./component/profile";
 import Contact from "./component/contact";
 import ErrorPage from "./component/error-page";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
@@ -34,8 +35,9 @@ const appRouter = createBrowserRouter([
     },
     {
       path:"/about",
-      element:<AboutUs/>,
-      errorElement:<ErrorPage/>
+      element:<AboutUs name={"About Us"}/>,
+      errorElement:<ErrorPage/>,
+      
     },
     {
       path:"/contact",

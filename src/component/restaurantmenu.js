@@ -1,36 +1,12 @@
-import { useEffect } from "react";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { ImgUrl } from "./constants";
 import Loader from "./loader.js";
+import useRestaurantMenu from "../../utils/useRestaurantMenu.js";
 
 const RestaurantMenu = () => {
   const { id } = useParams();
-  const [restaurantmenu, setRestaurantMenu] = useState(null);
-
-  useEffect(() => {
-    getmenueitems();
-  }, []);
-
-  async function getmenueitems() {
-    try {
-      let listarray;
-      const json = await fetch(
-        `https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=23.02760&lng=72.58710&restaurantId=${id}&catalog_qa=undefined&submitAction=ENTER`
-      );
-      const data = await json.json();
-    
-      setRestaurantMenu(
-        data?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card
-        ?.card?.itemCards
-      );
-
-     
-    } catch (error) {
-      console.error("Error fetching menu items:", error);
-    }
-  }
-
+  const restaurantmenu = useRestaurantMenu(id);
 
   return restaurantmenu == null ? (
     <Loader numrows={24} />
@@ -39,10 +15,8 @@ const RestaurantMenu = () => {
       <div className="main flex flex-col items-center">
         <Categoery />
         <div className=" container w-[900px] min-h-screen  ">
-        
-
           {restaurantmenu.map((res, index) => {
-            return<List {...res.card.info} key={index}/>;
+            return <List {...res.card.info} key={index} />;
           })}
         </div>
       </div>
@@ -116,3 +90,4 @@ const Categoery = () => {
     </>
   );
 };
+  

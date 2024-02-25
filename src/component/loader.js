@@ -1,5 +1,7 @@
 const FakeDiv = () => {
-  return <div className="w-[400px] h-[300px] bg-slate-300 m-5 rounded-md animate-pulse "></div>;
+  return (
+    <div className="w-[400px] h-[300px] bg-slate-300 m-5 rounded-md animate-pulse "></div>
+  );
 };
 
 const Loader = ({ numrows }) => {
@@ -16,6 +18,6 @@ const Loader = ({ numrows }) => {
       </div>
     </>
   );
-};  
+};
 
 export default Loader;
