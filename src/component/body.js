@@ -2,6 +2,8 @@ import { Card } from "./card";
 import { useEffect, useState } from "react";
 import Loader from "./loader";
 import { Link } from "react-router-dom";
+import Offline from "./internetslow";
+import useOnline from "../../utils/useOnline";
 
 const isUserAuth = true;
 const NorestaurantFound = () => {
@@ -37,6 +39,12 @@ const Body = () => {
       json.data.cards[1]?.card?.card?.gridElements?.infoWithStyle
         ?.restaurants || []
     ); // Use optional chaining and provide a default empty array if any property is missing
+  }
+
+  const isOnline = useOnline();
+
+  if(!isOnline){
+    return <Offline/>
   }
   return (
     <>

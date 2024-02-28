@@ -18,7 +18,7 @@ const useRestaurantMenu = (id) => {
       console.log(data);
 
       setRestaurantMenu(
-        data?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card
+        data?.data?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card
           ?.card?.itemCards
       );
     } catch (error) {
