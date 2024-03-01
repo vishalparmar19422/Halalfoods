@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from "react";
+import React, { lazy, Suspense, useState } from "react";
 import Loader from "./component/loader";
 import ReactDOM from "react-dom/client";
 import { Nav } from "./component/nav";
@@ -12,16 +12,18 @@ import RestaurantMenu from "./component/restaurantmenu";
 
 const Instamart = lazy(() => import("./component/instamart"));
 
-const Main = () => (
-  <>
-    <div className="w-full h-full ">
-      <Nav />
-      {}
-      <Outlet />
-      <Footer />
-    </div>
-  </>
-);
+const Main = () => {
+ 
+  return (
+    <>
+      <div className="w-full h-full ">
+        <Nav />
+        <Outlet />
+        <Footer />
+      </div>
+    </>
+  );
+};
 
 const appRouter = createBrowserRouter([
   {
@@ -31,7 +33,7 @@ const appRouter = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Body />,
+        element: <Body us />,
         errorElement: <ErrorPage />,
       },
       {
@@ -53,7 +55,7 @@ const appRouter = createBrowserRouter([
       {
         path: "/instamart",
         element: (
-          <Suspense fallback={<Loader numrows={24}/>}>
+          <Suspense fallback={<Loader numrows={24} />}>
             <Instamart />
           </Suspense>
         ),

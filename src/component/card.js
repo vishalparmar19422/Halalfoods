@@ -6,7 +6,7 @@ const restaurentList = {
   rating: 4.3,
 };
 
-export const Card = ({name,cuisines,cloudinaryImageId,avgRating}) => (
+export const Card = ({name,cuisines,cloudinaryImageId,avgRating,user}) => (
   <>
 
     <div className="h-[350px] w-[350px]  rounded-3xl m-2 " >
@@ -19,6 +19,9 @@ export const Card = ({name,cuisines,cloudinaryImageId,avgRating}) => (
         <h1 className="self-start pl-8">{name}</h1>
         <h1 className="self-start pl-8 pt-2">{cuisines.join(", ")}</h1>
         <h1 className="self-start pl-8 pt-2">{avgRating}&#9733;</h1>
+        
+
+
       </div>
     </div>
   </>
