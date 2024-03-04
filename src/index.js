@@ -1,4 +1,4 @@
-import React, { lazy, Suspense, useState } from "react";
+import React, { lazy, Suspense, useState, useContext } from "react";
 import Loader from "./component/loader";
 import ReactDOM from "react-dom/client";
 import { Nav } from "./component/nav";
@@ -9,18 +9,37 @@ import Contact from "./component/contact";
 import ErrorPage from "./component/error-page";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import RestaurantMenu from "./component/restaurantmenu";
+import footerInfo from "../utils/userContext";
+import { Provider } from "react-redux";
+import store  from "../utils/store";
 
 const Instamart = lazy(() => import("./component/instamart"));
 
 const Main = () => {
- 
-  return (
+  const [user, setUser] = useState({
+    name: "Vishal Parmar",
+    gmail: "vishalparmar8234@gmail.com",
+    copyRight: {
+      symbol: "©",
+      year: 2024,
+      appName: "Halal food",
+    },
+  });
+
+  return (    
     <>
-      <div className="w-full h-full ">
-        <Nav />
-        <Outlet />
-        <Footer />
-      </div>
+      <Provider store={store}>  
+        <footerInfo.Provider
+          value={{
+            user: user,
+            setUser: setUser,
+          }}
+        >
+          <Nav />
+          <Outlet />
+          <Footer />
+        </footerInfo.Provider>
+      </Provider>
     </>
   );
 };

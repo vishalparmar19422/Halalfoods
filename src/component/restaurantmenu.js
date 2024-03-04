@@ -3,7 +3,8 @@ import { useParams } from "react-router-dom";
 import { ImgUrl } from "./constants";
 import Loader from "./loader.js";
 import useRestaurantMenu from "../../utils/useRestaurantMenu.js";
-
+import { addItem } from "../../utils/cartSlice.js";
+import { useDispatch } from "react-redux";
 const RestaurantMenu = () => {
   const { id } = useParams();
   const restaurantmenu = useRestaurantMenu(id);
@@ -20,13 +21,17 @@ const RestaurantMenu = () => {
           })}
         </div>
       </div>
-    </>
+    </> 
   );
 };
 export default RestaurantMenu;
 
 const List = ({ name, imageId, description, price, defaultPrice }) => {
   const displayPrice = defaultPrice !== undefined ? defaultPrice : price;
+  const dispatch = useDispatch(); 
+  function handleItems(){
+    dispatch(addItem("Frankie"))
+  }
   return (
     <>
       <div className=" main md:flex md:flex-col md:items-center  ">
@@ -36,7 +41,7 @@ const List = ({ name, imageId, description, price, defaultPrice }) => {
               src={ImgUrl + imageId}
               className="w-[200px] h-[200px] object-cover"
             ></img>
-            <button className="border-[1px] text-green-400 border-black w-[80px] mb-[5px] rounded-md  hover:bg-stone-900 transition-all font-bold z-10">
+            <button onClick={()=>handleItems()  } className="border-[1px] text-green-400 border-black w-[80px] mb-[5px] rounded-md  hover:bg-stone-900 transition-all font-bold z-10">
               Add
             </button>
           </div>

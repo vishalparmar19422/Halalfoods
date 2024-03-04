@@ -1,9 +1,10 @@
 import { Card } from "./card";
-import { useEffect, useState } from "react";
+import { useEffect, useState,useContext } from "react";
 import Loader from "./loader";
 import { Link } from "react-router-dom";
 import Offline from "./internetslow";
 import useOnline from "../../utils/useOnline";
+import footerInfo from "../../utils/userContext";
 
 const isUserAuth = true;
 const NorestaurantFound = () => {
@@ -20,6 +21,7 @@ const Body = () => {
   const [allrestaurants, setAllrestaurants] = useState([]);
   const [restaurants, setRestaurants] = useState([]);
   const [searchTxt, setSearchTxt] = useState("");
+  const {user,setUser } = useContext(footerInfo)
 
   useEffect(() => {
     getData();
@@ -38,7 +40,7 @@ const Body = () => {
     setRestaurants(
       json.data.cards[1]?.card?.card?.gridElements?.infoWithStyle
         ?.restaurants || []
-    ); // Use optional chaining and provide a default empty array if any property is missing
+    ); // Use optional chaining and provide a default empty array if any property is missing  
   }
 
   const isOnline = useOnline();
@@ -56,6 +58,7 @@ const Body = () => {
           onChange={(e) => setSearchTxt(e.target.value)}
           className="rounded-l-md focus:outline-none pl-2 w-[500px] bg-stone-500 placeholder:italic  placeholder:text-white text-white focus:text-white focus:text-lg"
         />
+        
         <button
           className="text-white rounded-r-lg bg-stone-500 pr-2 "
           onClick={() => {
