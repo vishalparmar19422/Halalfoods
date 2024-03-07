@@ -11,7 +11,7 @@ import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import RestaurantMenu from "./component/restaurantmenu";
 import footerInfo from "../utils/userContext";
 import { Provider } from "react-redux";
-import store  from "../utils/store";
+import store from "../utils/store";
 
 const Instamart = lazy(() => import("./component/instamart"));
 
@@ -26,9 +26,9 @@ const Main = () => {
     },
   });
 
-  return (    
+  return (
     <>
-      <Provider store={store}>  
+      <Provider store={store}>
         <footerInfo.Provider
           value={{
             user: user,
