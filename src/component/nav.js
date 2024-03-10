@@ -7,7 +7,11 @@ export const Nav = () => {
   const [button, setButton] = useState(false);
   const [menu, setMenu] = useState(false);
   const { user, setUser } = useContext(footerInfo);
-  const cartItems = useSelector((store)=>store.cart.items)
+  const cartItems = useSelector((store) => store.cart.items);
+
+  // const [cartItems, setCartItems] = useState(
+  //   useSelector((store) => store.cart.items)
+  // );
 
   function animate() {
     setMenu((prev) => !prev);
@@ -59,8 +63,8 @@ export const Nav = () => {
                 </li>
               </Link>
               <Link to="/cart">
-                <li className="p-1 rounded-md h-12 hover:bg-green-400 transition ease-linear duration-200   ">
-                Cart-{cartItems.length}
+                <li className="p-1 rounded-md h-12 hover:bg-green-400 transition ease-linear duration-200    ">
+                  Cart-{cartItems.length}
                 </li>
               </Link>
               <Link to="/instamart">
@@ -108,10 +112,23 @@ export const Nav = () => {
             </li>
           </Link>
           <Link to="/cart">
-            <li className="p-1 rounded-md h-8 hover:bg-red-600 transition ease-linear duration-200   ">
-              Cart-{cartItems.length}
+            <li
+              after-dynamic-value={cartItems.length}
+              className={`relative p-1 rounded-md h-8 hover:bg-red-600 transition ease-linear duration-200  
+              after:content-[attr(after-dynamic-value)]  
+              after:absolute
+              after:top-0
+              after:rounded-tr-md
+              after:rounded-br-md
+              after:w-4
+              after:h-8
+              after:hover:bg-red-600
+              after:text-green-500`}
+            >
+              Cart
             </li>
           </Link>
+
           <Link to="/instamart">
             <li className="p-1 rounded-md h-8 hover:bg-red-600 transition ease-linear duration-200   ">
               Instamart

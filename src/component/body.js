@@ -7,11 +7,11 @@ import useOnline from "../../utils/useOnline";
 import footerInfo from "../../utils/userContext";
 
 const isUserAuth = true;
-const NorestaurantFound = () => {
+export const NorestaurantFound = ({title}) => {
   return (
     <>
       <div className="w-full h-[600px] mt-[600px] p-0 text-[80px] rounded-lg flex justify-center items-start animate-bounce">
-        <h1>NO Result Found</h1>
+        <h1>{title} </h1>
       </div>
     </>
   );
@@ -76,7 +76,7 @@ const Body = () => {
         {allrestaurants.length == 0 ? (
           <Loader numrows={24} />
         ) : restaurants.length == 0 ? (
-          <NorestaurantFound />
+          <NorestaurantFound title={"NO Result Found"} />
         ) : (
           restaurants.map((restaurant, index) => {
             return <Link key={restaurant.info.id} to={"/restaurant/"+restaurant.info.id}><Card {...restaurant.info} /></Link>

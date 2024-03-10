@@ -4,10 +4,16 @@ import { ImgUrl } from "./constants";
 import Loader from "./loader.js";
 import useRestaurantMenu from "../../utils/useRestaurantMenu.js";
 import { addItem } from "../../utils/cartSlice.js";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux"; 
 const RestaurantMenu = () => {
   const { id } = useParams();
+  const dispatch = useDispatch();
   const restaurantmenu = useRestaurantMenu(id);
+
+  function handleItems(items) {
+    dispatch(addItem(items));
+    console.log(items);
+  }
 
   return restaurantmenu == null ? (
     <Loader numrows={24} />
@@ -17,33 +23,37 @@ const RestaurantMenu = () => {
         {/* <Categoery /> */}
         <div className=" container w-[900px] min-h-screen  ">
           {restaurantmenu.map((res, index) => {
-            return <List {...res.card.info} key={index} />;
+            return (
+              <>
+                    <List {...res.card.info} key={index} />
+                <button
+                  onClick={() => handleItems(res)}
+                  className="border-[1px] text-green-400 border-black w-[80px] mb-[5px] rounded-md  hover:bg-stone-900 transition-all font-bold z-10"
+                >
+                  Add
+                </button>
+              </>
+            );
           })}
         </div>
       </div>
-    </> 
+    </>
   );
 };
 export default RestaurantMenu;
 
-const List = ({ name, imageId, description, price, defaultPrice }) => {
+ export const List = ({ name, imageId, description, price, defaultPrice ,index}) => {
   const displayPrice = defaultPrice !== undefined ? defaultPrice : price;
-  const dispatch = useDispatch(); 
-  function handleItems(){
-    dispatch(addItem("Frankie"))
-  }
+
   return (
     <>
       <div className=" main md:flex md:flex-col md:items-center  ">
         <div className=" md:flex md:justify-between md:w-[900px] md:h-[250px] md:bg-netural-400 md:shadow-[100px]  md:border-t-[1px] md:border-zinc-800 ">
-        <div className=" flex flex-col items-center md:flex  md:flex-col md:justify-between md:items-center">
+          <div className=" flex flex-col items-center md:flex  md:flex-col md:justify-between md:items-center">
             <img
               src={ImgUrl + imageId}
               className="w-[200px] h-[200px] object-cover"
             ></img>
-            <button onClick={()=>handleItems()  } className="border-[1px] text-green-400 border-black w-[80px] mb-[5px] rounded-md  hover:bg-stone-900 transition-all font-bold z-10">
-              Add
-            </button>
           </div>
           <div className=" flex flex-col items-center md:flex md:flex-col jmd:ustify-between md:p-4">
             <h1 className=" ">
@@ -52,12 +62,14 @@ const List = ({ name, imageId, description, price, defaultPrice }) => {
                 src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Veg_symbol.svg/1024px-Veg_symbol.svg.png"
               ></img>
               {name}
+              {index}
             </h1>
             <h1 className=""> &#8377;{Math.round(displayPrice / 100)}</h1>
 
-            <h1 className="w-[500px] text-neutral-400 text-center">{description}</h1>
+            <h1 className="w-[500px] text-neutral-400 text-center">
+              {description}
+            </h1>
           </div>
-        
         </div>
       </div>
     </>
@@ -96,4 +108,3 @@ const List = ({ name, imageId, description, price, defaultPrice }) => {
 //     </>
 //   );
 // };
-  

@@ -10,8 +10,10 @@ import ErrorPage from "./component/error-page";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import RestaurantMenu from "./component/restaurantmenu";
 import footerInfo from "../utils/userContext";
-import { Provider } from "react-redux";
+import { Provider,useSelector } from "react-redux";
 import store from "../utils/store";
+import Cart from "./component/cart"
+
 
 const Instamart = lazy(() => import("./component/instamart"));
 
@@ -52,7 +54,7 @@ const appRouter = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Body us />,
+        element: <Body  />,
         errorElement: <ErrorPage />,
       },
       {
@@ -63,6 +65,11 @@ const appRouter = createBrowserRouter([
       {
         path: "/contact",
         element: <Contact />,
+        errorElement: <ErrorPage />,
+      },
+      {
+        path: "/cart",
+        element: <Cart  />,
         errorElement: <ErrorPage />,
       },
 
