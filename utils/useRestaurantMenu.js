@@ -10,7 +10,6 @@ const useRestaurantMenu = (id) => {
 
   async function getmenueitems() {
     try {
-      let listarray;
       const json = await fetch(
         `https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=23.02760&lng=72.58710&restaurantId=${id}&catalog_qa=undefined&submitAction=ENTER`
       );
